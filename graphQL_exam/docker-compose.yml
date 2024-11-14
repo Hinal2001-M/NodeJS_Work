@@ -1,0 +1,38 @@
+version: '3.9'
+services:
+
+  db:
+    image: postgres:14.7
+    container_name: graphql_db
+    environment: 
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: honey8201
+      POSTGRES_DB: graphql
+    volumes: 
+      - db_data:/var/lib/postgresql/data
+    ports: 
+      - 5436:5432
+    restart: always
+
+  redis:
+    image: redis
+    container_name: redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - 6379:6379
+    
+  api:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env
+    container_name: rest-server
+    ports: 
+      - 4000:4000
+    depends_on:
+      - db
+      - redis
+
+volumes:
+  db_data:

@@ -1,0 +1,37 @@
+{
+    "name": "graphql_exam",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon index.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@apollo/server": "4.4.0",
+        "@graphql-tools/load-files": "6.6.1",
+        "@graphql-tools/merge": "8.3.18",
+        "@graphql-tools/schema": "9.0.16",
+        "@graphql-tools/utils": "9.2.1",
+        "apollo-server": "3.11.1",
+        "bcrypt": "5.1.0",
+        "bull": "^4.10.4",
+        "dotenv": "16.0.3",
+        "graphql": "16.6.0",
+        "graphql-rate-limit": "3.3.0",
+        "graphql-scalars": "^1.20.1",
+        "graphql-tools": "8.3.18",
+        "graphql-validation-complexity": "^0.4.2",
+        "ioredis": "^5.3.1",
+        "jsonwebtoken": "9.0.0",
+        "lodash": "^4.17.21",
+        "node-cron": "3.0.2",
+        "nodemailer": "6.9.1",
+        "nodemon": "^2.0.20",
+        "pg": "8.9.0",
+        "sequelize": "6.28.0"
+    }
+}

@@ -1,0 +1,78 @@
+directive @auth on FIELD_DEFINITION
+directive @rateLimit on FIELD_DEFINITION
+
+scalar EMAIL
+scalar DATE
+
+type User {
+    email: EMAIL!
+    name: String!
+}
+
+type Event {
+    id: Int
+    title: String
+    date: String
+    description: String
+    location: String
+    hostedBy: User
+}
+
+type Invite {
+    title: String!
+    date: String!
+    description: String
+    location: String!
+    hostedBy: User
+    attendees:[User!]!
+}
+
+type EventInvites {
+    event: Invite!
+}
+
+type Mutation {
+    register(details: NewUser): User!
+    login(Credentials: Credentials): String! @rateLimit
+    changePassword(oldPassword:String!,newPassword:String!):String! @auth
+    resetRequest(email:EMAIL!):String!
+    resetPassword(password:String!):String!
+    createEvent(eventDetails:NewEvent):String! @auth
+    updateEvent(id:Int!,details:ChangeEventDetails):String! @auth
+    deleteEvent(id: Int!):String! @auth
+    inviteUser(id:Int!,email:EMAIL!):String! @auth
+    logout:String!
+    sendMailToAll:String
+    sendScheduleMail:String
+}
+
+input Credentials {
+    email: EMAIL!
+    password: String!
+}
+
+input NewUser {
+    name: String!
+    email: EMAIL!
+    password: String!
+}
+
+input NewEvent {
+    title: String!
+    date: DATE!
+    description: String
+    location: String!
+}
+
+input ChangeEventDetails {
+    title: String
+    date: String
+    description: String
+    location: String
+}
+
+type Query {
+    getEvents:[Event] @auth
+    getEvent(eventId:Int):Event @auth
+    getInvites:[EventInvites] @auth
+}
